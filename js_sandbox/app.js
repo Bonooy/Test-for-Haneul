@@ -1,4 +1,4 @@
-// JAVASCRIPT 문법 다루기
+// JAVASCRIPT 문법
 
 
 // var, let, const
