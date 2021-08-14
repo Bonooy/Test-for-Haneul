@@ -1,3 +1,6 @@
+// JAVASCRIPT 문법 다루기
+
+
 // var, let, const
 
 // var : 변수 재선언 O
