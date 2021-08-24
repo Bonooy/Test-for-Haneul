@@ -1,0 +1,237 @@
+// js_sandbox_4
+
+// Error Handling with Try...Catch
+
+const user = {email: 'jdoe@gmail.com'};
+
+try {
+  // Produce a ReferenceError
+  // myFunction();
+
+  // Produce a TypeError
+  // null.myFunction();
+
+  // Will produce SyntaxError
+  // eval('Hello World');
+
+  // Will produce a URIError
+  // decodeURIComponent('%');
+
+  if(!user.name) {
+    //throw 'User has no name';
+    throw new SyntaxError('User has no name');
+  }
+
+} catch(e) {
+  console.log(`User Error: ${e.message}`);
+  // console.log(e);
+  // console.log(e.message);
+  // console.log(e.name);
+  // console.log(e instanceof TypeError);
+} finally {
+  console.log('Finally runs reguardless of result...');
+}
+
+console.log('Program continues...');
+
+
+
+
+// Regular Expressions - Evaluation Functions
+
+let re;
+re = /hello/;
+re = /hello/i; // i =  case insensitive
+// re = /hello/g; // Global search
+
+// console.log(re);
+// console.log(re.source);
+
+// exec() - Return result in an array or null
+// const result = re.exec('hello world');
+
+// console.log(result);
+// console.log(result[0]);
+// console.log(result.index);
+// console.log(result.input);
+
+// test() - Returns true or false
+// const result = re.test('Hello');
+// console.log(result);
+
+// match() - Return result array or null
+// const str = 'Hello There';
+// const result = str.match(re);
+// console.log(result);
+
+// search() - Returns index of the first match if not found retuns -1
+// const str = 'Brad Hello There';
+// const result = str.search(re);
+// console.log(result);
+
+// replace() - Return new string with some or all matches of a pattern
+// const str = 'Hello There';
+// const newStr = str.replace(re, 'Hi');
+// console.log(newStr);
+
+
+
+
+// Regular Expressions - Metacharacter Symbols
+// 메타문자 : 정규식 엔진에게 어떤 단일 문자를 매칭할지 알려주는 역할의 특수문자
+
+let re;
+// Literal Characters
+re = /hello/; // 대소문자를 구별하며 패턴과 일치한 첫번째 결과만 반환.
+re = /hello/i;  // 대소문자를 구별하지 않고 패턴과 일치한 첫번째 결과 반환.
+
+// Metacharacter Symbols
+re = /^h/i;           // Must start with  // 단어의 맨 앞에 위치한 해당 패턴만 검색. EX) 'h'로 시작하는 단어의 'h'만을 검색.
+re = / world$/i;     // Must ends with  // 단어의 맨 뒤에 위치한 해당 패턴만 검색.  EX) 'world'로 끝나는 단어의 'world'만을 검색.
+re = /^hello$/i;     // Must begin and end with
+re = /h.llo/i;      // Matches any ONE character  // 임의의 한 문자를 표현
+re = /h*llo/i;      // Matches any character 0 or more times  // h가 0번 이상 반복.
+re = /gre?a?y/i;    // Optional character // 0번 또는 1번 반복되는 경우 일치한다고 판단하는 수량자
+re = /gre?a?y\?/i;    // Escape character // 특수문자를 문자 그대로 검색하고 싶다면 백슬래시롤 앞에 붙여 알려줌.
+
+
+// String to match
+const str = 'Gray?';
+
+
+// Log Results
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re, str) {
+  if(re.test(str)) {
+    console.log(`${str} matches ${re.source}`);
+  } else {
+    console.log(`${str} does NOT match ${re.source}`);
+  }
+}
+
+reTest(re, str);
+
+
+
+
+// Regular Expressions - Character Sets & Quantifiers
+
+let re;
+// Literal Characters
+re = /hello/;
+re = /hello/i;
+
+// Metacharacter Symbols
+re = /^h/i;           // Must start with
+re = / world$/i;     // Must ends with
+re = /^hello$/i;     // Must begin and end with
+re = /h.llo/i;      // Matches any ONE character
+re = /h*llo/i;      // Matches any character 0 or more times
+re = /gre?a?y/i;    // Optional character
+re = /gre?a?y\?/i;    // Escape character 
+
+
+// Brackets [] - Character Sets
+re = /gr[ae]y/i;      // Must be an a or e
+re = /[GF]ray/i;      // Must be a G or F
+re = /[^GF]ray/i;      // Match anything except a G or F
+re = /[A-Z]ray/;      // Match any uppercase letter
+re = /[a-z]ray/;      // Match any lowercase letter
+re = /[A-Za-z]ray/;   // Match any  letter
+re = /[0-9][0-9]ray/;      // Match any digit
+
+// Braces {} - Quantifiers
+re = /Hel{2}o/i;      // Must occur exactly {m} amount of times
+re = /Hel{2,4}o/i;      // Must occur exactly {m} amount of times
+re = /Hel{2,}o/i;      // Must occur at least {m} times
+
+// Paretheses () - Grouping
+re = /^([0-9]x){3}$/
+
+// String to match
+const str = '3x3x3x';
+
+// Log Results
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re, str) {
+  if(re.test(str)) {
+    console.log(`${str} matches ${re.source}`);
+  } else {
+    console.log(`${str} does NOT match ${re.source}`);
+  }
+}
+
+reTest(re, str);
+
+
+
+
+// Regular Expressions - Shorthand Character Classes
+
+let re;
+// Literal Characters
+re = /hello/;
+re = /hello/i;
+
+// Metacharacter Symbols
+re = /^h/i;           // Must start with
+re = / world$/i;     // Must ends with
+re = /^hello$/i;     // Must begin and end with
+re = /h.llo/i;      // Matches any ONE character
+re = /h*llo/i;      // Matches any character 0 or more times
+re = /gre?a?y/i;    // Optional character
+re = /gre?a?y\?/i;    // Escape character 
+
+
+// Brackets [] - Character Sets
+re = /gr[ae]y/i;      // Must be an a or e
+re = /[GF]ray/i;      // Must be a G or F
+re = /[^GF]ray/i;      // Match anything except a G or F
+re = /[A-Z]ray/;      // Match any uppercase letter
+re = /[a-z]ray/;      // Match any lowercase letter
+re = /[A-Za-z]ray/;   // Match any  letter
+re = /[0-9][0-9]ray/;      // Match any digit
+
+// Braces {} - Quantifiers
+re = /Hel{2}o/i;      // Must occur exactly {m} amount of times
+re = /Hel{2,4}o/i;      // Must occur exactly {m} amount of times
+re = /Hel{2,}o/i;      // Must occur at least {m} times
+
+// Paretheses () - Grouping
+re = /^([0-9]x){3}$/
+
+// Shorthand Character Classes
+re = /\w/;    // Word character - alphanumeric or _
+re = /\w+/;    // + = one or more
+re = /\W/;    // Non-Word character
+re = /\d/;    // Match any digit
+re = /\d+/;    // Match any digit 0 or more times
+re = /\D/;      // Match any Non-digit
+re = /\s/;      // Match whitespace char
+re = /\S/;      // Match non-whitespace char
+re = /Hell\b/i; // Word boundary
+
+// Assertions
+re = /x(?=y)/;  // Match x only if followed by y
+re = /x(?!y)/;  // Match x only if NOT followed by y
+
+// String to match
+const str = 'dkjekdxydjekdj';
+
+// Log Results
+const result = re.exec(str);
+console.log(result);
+
+function reTest(re, str) {
+  if(re.test(str)) {
+    console.log(`${str} matches ${re.source}`);
+  } else {
+    console.log(`${str} does NOT match ${re.source}`);
+  }
+}
+
+reTest(re, str);
